@@ -5,7 +5,6 @@
 export default class compiler {
   constructor (el, vm) {
     vm.$el = document.querySelector(el)
-    let fragment = document.createDocumentFragment();
     this.replace(vm.$el, vm)
   }
   replace (frag, vm) {
@@ -34,7 +33,8 @@ export default class compiler {
             node.value = vm[exp];
           }
           // 监听变化
-          vm.$watch(exp, function(newVal) {
+          vm.$watch(exp, function(newVal, oldVal) {
+            console.log('callback', newVal, oldVal);
             node.value = newVal;
           });
 

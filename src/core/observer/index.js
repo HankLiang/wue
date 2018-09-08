@@ -26,10 +26,13 @@ let defineReactive = (obj, key, value) => {
         return
       }
       value = newVal
+      // console.log(newVal, 'dep.notify')
       dep.notify()
     },
     get () {
+      console.log(key, 'get Dep.target');
       if (Dep.target) {
+        console.log(key, 'Dep.target', Dep.target.id);
         dep.addDepend()
       }
       return value
